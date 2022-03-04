@@ -1,8 +1,10 @@
+import java.util.HashMap;
+import java.util.Map;
 public class RubiksCube {
-
+Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
 
     int[][][] rubiksCube = new int[6][3][3];
-    int[][] facing = new int[6][4];
+    int[][] facing = new int[6][4]; 
     //facing[] = current face, facing[]{left, up, right, down}
     //side 5 is above 1
     //side 6 is below 1
@@ -29,10 +31,9 @@ public class RubiksCube {
             }
         }
 
-
     }
 
-    void turnFaceLeft(int face){
+    private void turnFaceLeft(int face){
 
         //1 1 > 1 2 >  1 3 > 2 3 > 3 3 > 3 2 > 3 1 > 2 1 > 1 1
         int row = 0;
@@ -78,7 +79,7 @@ public class RubiksCube {
         //Side 5(up) left:4 ; up:3 ; right:2 ; down:1
         //Side 6(down) left:2 ; up:3 ; right:4 ; down:1
         
-
+        //hashmap needed
         //Possibility 2: side(1-4), top, bottom: 1, [2][x], [0][x]; 2, [x][2], [x][2]; 3, [0][x], [2][x]; 4, [x][0], [x][0];
         //side 5(up) left:4 ; up:3 ; right:2 ; down:1
         //side 6(down) left:2 ; up:1 ; right:4 ; down:3
@@ -86,7 +87,7 @@ public class RubiksCube {
     }
 
 
-    void turnFaceRight(int face){
+    private void turnFaceRight(int face){
         turnFaceLeft(face);
         turnFaceLeft(face);
         turnFaceLeft(face);
