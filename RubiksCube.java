@@ -1,7 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
 public class RubiksCube {
-Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
+
+    Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
 
     int[][][] rubiksCube = new int[6][3][3];
     int[][] facing = new int[6][4]; 
@@ -9,7 +10,7 @@ Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
     //side 5 is above 1
     //side 6 is below 1
     RubiksCube(){
-
+        
         for(int i = 0; i < rubiksCube.length; i++){
             for(int j = 0; j < rubiksCube[i].length; j++){
                 for(int k = 0; k < rubiksCube[i][j].length; k++){
@@ -30,6 +31,18 @@ Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
 
             }
         }
+        rubiksCube[0][0][0] = 1;
+        rubiksCube[0][0][1] = 2;
+        rubiksCube[0][0][2] = 3;
+        rubiksCube[0][1][0] = 4;
+        rubiksCube[0][1][1] = 5;
+        rubiksCube[0][1][2] = 6;
+        rubiksCube[0][2][0] = 7;
+        rubiksCube[0][2][1] = 8;
+        rubiksCube[0][2][2] = 9;
+        printFace(1);
+        turnFaceLeft(1);
+        printFace(1);
 
     }
 
@@ -39,30 +52,30 @@ Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
         int row = 0;
         int column = 0;
         int nextRow = 0;
-        int nextColumn = 0;
-        int target = 3;
+        int nextColumn = 1;
+        int target = 2;
         int add = 1;
-
+        face -= 1;
         //swap main face
         int temp = rubiksCube[face][row][column];
-        for(int i = 0; i < 7; i++){
+        for(int i = 0; i < 8; i++){
             rubiksCube[face][row][column] = rubiksCube[face][nextRow][nextColumn];
             if(column < target || (target == 0 && column > 0)){
                 column += add;
-                if(column == target){
-                    nextRow += add;
-                }
-                else{
-                    nextColumn = column + add;
-                }
-            }
-            else if(row < target || (target == 0 && row > 0)){
-                row += add;
-                if(column == target){
+                if(nextColumn != target){
                     nextColumn += add;
                 }
                 else{
                     nextRow = row + add;
+                }
+            }
+            else if(row < target || (target == 0 && row > 0)){
+                row += add;
+                if(nextRow != target){
+                    nextRow += add;
+                }
+                else{
+                    nextColumn = column - add;
                 }
             }
             else{
@@ -70,7 +83,7 @@ Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
                 target = 0;
             }
         }
-        rubiksCube[face][row][column] = temp;
+        rubiksCube[face][1][0] = temp;
 
         //swap connected sides
         //left side[x][2] < top depends < right side[x][0] < bottom depends;
@@ -84,6 +97,16 @@ Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
         //side 5(up) left:4 ; up:3 ; right:2 ; down:1
         //side 6(down) left:2 ; up:1 ; right:4 ; down:3
 
+        //if face is 1 2 3 or 4
+        //else face is 5 or 6
+        if(face < 5){
+            //face(face - 1)[2][x] goes to (top) goes to face(face + 1) goes to (bottom) goes to face(-1)
+            int[] tempArr = rubiksCube[face][face];
+        }
+        else{
+
+        }
+
     }
 
 
@@ -93,5 +116,15 @@ Map<Integer, int[]> sides = new HashMap<Integer, int[]>();
         turnFaceLeft(face);
     }
 
-
+    public void printFace(int face){
+        String temp = "Face: " + face + "\n";
+        face -= 1;
+        for(int j = 0; j < rubiksCube[face].length; j++){
+            for(int i = 0; i < rubiksCube[face][j].length; i++){
+                temp += " " + rubiksCube[face][j][i];
+            }
+            temp += "\n";
+        }
+        System.out.println(temp);
+    }
 }
