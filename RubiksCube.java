@@ -31,7 +31,7 @@ public class RubiksCube {
 
             }
         }
-        turnFaceLeft(0);
+        turnFaceLeft(1);
         printAllFace();
     }
 
@@ -91,7 +91,7 @@ public class RubiksCube {
         if(face < 4){
 
             int leftFace = face - 1;
-            if(leftFace < 0)face = 3;
+            if(leftFace < 0)leftFace = 3;
 
             int rightFace = face + 1;
 
@@ -144,12 +144,12 @@ public class RubiksCube {
     }
 
     public void printAllFace(){
-        printFace(0);
         printFace(1);
         printFace(2);
         printFace(3);
         printFace(4);
         printFace(5);
+        printFace(6);
     }
 
     public void printFace(int face){
