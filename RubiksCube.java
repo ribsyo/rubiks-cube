@@ -97,9 +97,9 @@ public class RubiksCube {
 
             if(rightFace > 3)rightFace = 0;
             int tempTopEdge = 0;
-            int tempBottomEdge = -2;
+            int tempBottomEdge = 2;
             int tempTopTracker = -2;
-            int tempBottomTracker = 0;
+            int tempBottomTracker = -2;
 
             //face(face - 1)[2][x] goes to (top) goes to face(face + 1) goes to (bottom) goes to face(-1)
 
@@ -117,15 +117,25 @@ public class RubiksCube {
 
                 for(int i = 0; i < 3; i++){
                     rubiksCube[leftFace][i][2] = rubiksCube[4][tempTopEdge][Math.abs(tempTopTracker + i)];
-                    rubiksCube[4][Math.abs(tempTopEdge)][Math.abs(tempTopTracker + i)] = rubiksCube[rightFace][Math.abs(-2 + i)][0];
+                    rubiksCube[4][tempTopEdge][Math.abs(tempTopTracker + i)] = rubiksCube[rightFace][Math.abs(-2 + i)][0];
                     rubiksCube[rightFace][Math.abs(-2 + i)][0] = rubiksCube[5][Math.abs(tempBottomEdge)][i];
-                    rubiksCube[5][Math.abs(tempBottomEdge)][i] = tempArr[Math.abs(tempBottomEdge + i)];
+                    rubiksCube[5][Math.abs(tempBottomTracker)][i] = tempArr[Math.abs(tempBottomTracker + i)];
                 }
 
             }
             else{//side 2 and 4
                 if(face == 1){
+                    tempTopEdge = 2;
+                    tempBottomEdge = 0;
+                    tempTopTracker = 0;
+                }
+
+                for(int i = 0; i < 3; i++){
+                    rubiksCube[leftFace][i][2] = rubiksCube[4][Math.abs(tempTopTracker + i)][tempTopEdge];
+                    rubiksCube[4][Math.abs(tempTopTracker + i)][tempTopEdge] = rubiksCube[rightFace][Math.abs(-2 + i)][0];
+                    rubiksCube[rightFace][Math.abs(-2 + i)][0] = rubiksCube[5][Math.abs(tempBottomTracker + i)][tempBottomEdge];
                     
+
                 }
 
 
