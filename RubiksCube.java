@@ -31,12 +31,12 @@ public class RubiksCube {
 
             }
         }
-        rubiksCube[1][2][2] = 9;
-        rubiksCube[3][0][0] = 9;
-        rubiksCube[4][0][2] = 9;
+        rubiksCube[0][2][0] = 9;
+        rubiksCube[2][0][2] = 9;
+        rubiksCube[4][2][0] = 9;
         rubiksCube[5][2][0] = 9;
         printAllFace();
-        turnFaceLeft(3);
+        turnFaceLeft(4);
         printAllFace();
     }
 
@@ -124,7 +124,7 @@ public class RubiksCube {
                 for(int i = 0; i < 3; i++){
                     rubiksCube[leftFace][i][2] = rubiksCube[4][tempTopEdge][Math.abs(tempTopTracker + i)];
                     rubiksCube[4][tempTopEdge][Math.abs(tempTopTracker + i)] = rubiksCube[rightFace][Math.abs(-2 + i)][0];
-                    rubiksCube[rightFace][Math.abs(-2 + i)][0] = rubiksCube[5][Math.abs(tempBottomEdge)][Math.abs(tempBottomTracker + i)];
+                    rubiksCube[rightFace][Math.abs(-2 + i)][0] = rubiksCube[5][tempBottomEdge][Math.abs(tempBottomTracker + i)];
                     rubiksCube[5][tempBottomEdge][Math.abs(tempBottomTracker + i)] = tempArr[i];
                 }
 
@@ -132,23 +132,35 @@ public class RubiksCube {
             else{//side 2 and 4
                 if(face == 1){
                     tempTopEdge = 2;
-                    tempBottomEdge = 0;
+                    tempBottomEdge = 2;
                     tempTopTracker = 0;
+                    tempBottomTracker = 0;
                 }
+
+
 
                 for(int i = 0; i < 3; i++){
                     rubiksCube[leftFace][i][2] = rubiksCube[4][Math.abs(tempTopTracker + i)][tempTopEdge];
                     rubiksCube[4][Math.abs(tempTopTracker + i)][tempTopEdge] = rubiksCube[rightFace][Math.abs(-2 + i)][0];
                     rubiksCube[rightFace][Math.abs(-2 + i)][0] = rubiksCube[5][Math.abs(tempBottomTracker + i)][tempBottomEdge];
-                    
-
+                    rubiksCube[5][Math.abs(tempBottomTracker + i)][tempBottomEdge] = tempArr[i];
                 }
 
 
             }
         }
         else{
-
+            int tempEdge = 0;
+            if(face == 4){
+                tempEdge = 2;
+            }
+            int[] tempArr = {rubiksCube[0][tempEdge][0], rubiksCube[0][tempEdge][1], rubiksCube[0][tempEdge][2]};
+            for(int i = 0; i < 3; i++){
+                rubiksCube[0][tempEdge][i] = rubiksCube[3][tempEdge][i];
+                rubiksCube[3][tempEdge][i] = rubiksCube[2][tempEdge][i];
+                rubiksCube[2][tempEdge][i] = rubiksCube[1][tempEdge][i];
+                rubiksCube[1][tempEdge][i] = tempArr[i];
+            }
         }
 
     }
