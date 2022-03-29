@@ -151,7 +151,7 @@ public class RubiksCube {
         }
         else{
             int tempEdge = 0;
-            if(face == 4){
+            if(face == 5){
                 tempEdge = 2;
             }
             int[] tempArr = {rubiksCube[0][tempEdge][0], rubiksCube[0][tempEdge][1], rubiksCube[0][tempEdge][2]};
