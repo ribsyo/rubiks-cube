@@ -31,6 +31,11 @@ public class RubiksCube {
 
             }
         }
+        rubiksCube[1][2][2] = 9;
+        rubiksCube[3][0][0] = 9;
+        rubiksCube[4][0][2] = 9;
+        rubiksCube[5][2][0] = 9;
+        printAllFace();
         turnFaceLeft(3);
         printAllFace();
     }
@@ -97,29 +102,30 @@ public class RubiksCube {
 
             if(rightFace > 3)rightFace = 0;
             int tempTopEdge = 0;
-            int tempBottomEdge = 2;
+            int tempBottomEdge = 0;
             int tempTopTracker = -2;
             int tempBottomTracker = -2;
 
             //face(face - 1)[2][x] goes to (top) goes to face(face + 1) goes to (bottom) goes to face(-1)
 
-            int[] tempArr = {rubiksCube[leftFace][2][0],rubiksCube[leftFace][2][1],rubiksCube[leftFace][2][2]};//store leftFace
+            int[] tempArr = {rubiksCube[leftFace][0][2],rubiksCube[leftFace][1][2],rubiksCube[leftFace][2][2]};//store leftFace
 
             //side(1-4), top, bottom: 1, [2][x], [0][x]; 2, [x][2], [x][2]; 3, [0][x], [2][x]; 4, [x][0], [x][0];
             if(face%2 == 0){//side 1 and 3
                 if(face == 0){
                     tempTopEdge = 2;
-                    tempBottomEdge = 0;
+                    tempBottomTracker = 0;
                 }
                 else {
+                    tempBottomEdge = 2;
                     tempTopTracker = 0;
                 }
 
                 for(int i = 0; i < 3; i++){
                     rubiksCube[leftFace][i][2] = rubiksCube[4][tempTopEdge][Math.abs(tempTopTracker + i)];
                     rubiksCube[4][tempTopEdge][Math.abs(tempTopTracker + i)] = rubiksCube[rightFace][Math.abs(-2 + i)][0];
-                    rubiksCube[rightFace][Math.abs(-2 + i)][0] = rubiksCube[5][Math.abs(tempBottomEdge)][i];
-                    rubiksCube[5][Math.abs(tempBottomTracker)][i] = tempArr[Math.abs(tempBottomTracker + i)];
+                    rubiksCube[rightFace][Math.abs(-2 + i)][0] = rubiksCube[5][Math.abs(tempBottomEdge)][Math.abs(tempBottomTracker + i)];
+                    rubiksCube[5][tempBottomEdge][Math.abs(tempBottomTracker + i)] = tempArr[i];
                 }
 
             }
