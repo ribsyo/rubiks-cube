@@ -192,4 +192,10 @@ public class RubiksCube {
         }
         System.out.println(temp);
     }
+
+
+    public boolean faceSolved(int face){
+        boolean solved = false;
+        return solved;
+    }
 }
