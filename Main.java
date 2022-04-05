@@ -3,6 +3,8 @@ public class Main {
     public static void main(String[] args){
 
         //make rubiks cube
-        RubiksCube cube = new RubiksCube();
+        //RubiksCube cube = new RubiksCube();
+        //new RubiksCube();
+
     }
 }

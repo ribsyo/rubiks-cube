@@ -31,13 +31,6 @@ public class RubiksCube {
 
             }
         }
-        rubiksCube[0][2][0] = 9;
-        rubiksCube[2][0][2] = 9;
-        rubiksCube[4][2][0] = 9;
-        rubiksCube[5][2][0] = 9;
-        printAllFace();
-        turnFaceLeft(4);
-        printAllFace();
     }
 
     private void turnFaceLeft(int face){
@@ -194,8 +187,37 @@ public class RubiksCube {
     }
 
 
-    public boolean faceSolved(int face){
+    public boolean faceSolved(int face){//not done
         boolean solved = false;
         return solved;
+    }
+
+    public int[][] findAllColor(int color){
+        int[][] tempPos = new int[6][3];
+        int piece = 0;
+
+        for(int i = 0; i < rubiksCube.length; i++){
+            for(int j = 0; j < rubiksCube[i].length; j++){
+                for(int k = 0; k < rubiksCube[i][j].length; k++){
+
+                    if(rubiksCube[i][j][k] == color){
+                        tempPos[piece][0] = i;
+                        tempPos[piece][1] = j;
+                        tempPos[piece][2] = k;   
+                    }   
+
+                }
+            }
+        }
+        return tempPos;
+    }
+
+    public int findColorAdjacent(int face, int x, int y){ 
+        int color = 0;
+
+        return color;
+    }
+    public int findColor(int face, int x, int y){ 
+        return rubiksCube[face][x][y];
     }
 }
