@@ -6,6 +6,7 @@ public class RubiksCube {
 
     int[][][] rubiksCube = new int[6][3][3];
     int[][] facing = new int[6][4]; 
+    int currentFace = 1;
     //facing[] = current face, facing[]{left, up, right, down}
     //side 5 is above 1
     //side 6 is below 1
@@ -185,6 +186,7 @@ public class RubiksCube {
         }
         System.out.println(temp);
     }
+<<<<<<< Updated upstream
 
 
     public boolean faceSolved(int face){//not done
@@ -221,3 +223,69 @@ public class RubiksCube {
         return rubiksCube[face][x][y];
     }
 }
+=======
+    /*
+    (left,right,up,down)
+    face 1: 4, 2, 5, 6
+    face 2: 1, 3, 5, 6
+    face 3: 2, 4, 5, 6
+    face 4: 3, 1, 5, 6
+    face 5: 4, 2, 3, 1
+    face 6: 4, 2, 1, 3
+    */
+    public int getTopFace(){
+        if(this.currentFace < 4)
+            return 5;
+        else if(this.currentFace == 4)
+            return 3;
+
+        return 1;
+    }
+
+    public int getBottomFace(){
+        if(this.currentFace < 4)
+        return 6;
+    else if(this.currentFace == 4)
+        return 1;
+
+    return 3;
+    }
+
+    public int getLeftFace(){
+        if(this.currentFace < 4){
+            int leftFace = this.currentFace - 1;
+            if(leftFace < 0)leftFace = 3;
+            return leftFace;
+        }
+        return 4;
+    }
+
+    public int getRightFace(){
+        if(this.currentFace < 4){
+            int rightFace = this.currentFace + 1;
+            if(rightFace > 3)rightFace = 0;
+            return rightFace;
+        }
+        return 5;
+    }
+
+    public int getCurrentFace(){
+        return this.currentFace + 1;
+    }
+
+    public void setCurrentFace(int face){
+        this.currentFace = face - 1;
+    }
+
+    public int getFaceValue(int row, int column){
+        return getFaceValue(this.currentFace, row, column);
+    }
+    public int getFaceValue(int face, int row, int column){
+        return rubiksCube[face - 1][row -1][column - 1];
+    }
+
+    public int getAdjacentValue(int face, int row, int column){
+        return rubiksCube[face - 1][row -1][column - 1];
+    }
+}
+>>>>>>> Stashed changes
