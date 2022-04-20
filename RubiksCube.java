@@ -32,6 +32,13 @@ public class RubiksCube {
 
             }
         }
+        rubiksCube[0][2][0] = 9;
+        rubiksCube[2][0][2] = 9;
+        rubiksCube[4][2][0] = 9;
+        rubiksCube[5][2][0] = 9;
+        printAllFace();
+        turnFaceLeft(4);
+        printAllFace();
     }
 
     private void turnFaceLeft(int face){
@@ -186,44 +193,6 @@ public class RubiksCube {
         }
         System.out.println(temp);
     }
-<<<<<<< Updated upstream
-
-
-    public boolean faceSolved(int face){//not done
-        boolean solved = false;
-        return solved;
-    }
-
-    public int[][] findAllColor(int color){
-        int[][] tempPos = new int[6][3];
-        int piece = 0;
-
-        for(int i = 0; i < rubiksCube.length; i++){
-            for(int j = 0; j < rubiksCube[i].length; j++){
-                for(int k = 0; k < rubiksCube[i][j].length; k++){
-
-                    if(rubiksCube[i][j][k] == color){
-                        tempPos[piece][0] = i;
-                        tempPos[piece][1] = j;
-                        tempPos[piece][2] = k;   
-                    }   
-
-                }
-            }
-        }
-        return tempPos;
-    }
-
-    public int findColorAdjacent(int face, int x, int y){ 
-        int color = 0;
-
-        return color;
-    }
-    public int findColor(int face, int x, int y){ 
-        return rubiksCube[face][x][y];
-    }
-}
-=======
     /*
     (left,right,up,down)
     face 1: 4, 2, 5, 6
@@ -278,14 +247,31 @@ public class RubiksCube {
     }
 
     public int getFaceValue(int row, int column){
-        return getFaceValue(this.currentFace, row, column);
+        return getFaceValue(this.currentFace + 1, row, column);
     }
     public int getFaceValue(int face, int row, int column){
         return rubiksCube[face - 1][row -1][column - 1];
     }
 
-    public int getAdjacentValue(int face, int row, int column){
-        return rubiksCube[face - 1][row -1][column - 1];
+    public int getAdjacentValue(int row, int column){
+        int tempFace = 0;
+        if(row == 1 || column == 1){
+            if(row == 1){
+                return getFaceValue(getTopFace(), row, column);
+            }
+            else if(row == 3){
+                return getFaceValue(getTopFace(), row, column);
+            }
+            else if(column == 1){
+
+            }
+            else{//column == 3
+                
+            }
+        }
+        else{
+
+        }
+        return (Integer) null;
     }
 }
->>>>>>> Stashed changes
