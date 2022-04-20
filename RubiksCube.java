@@ -325,6 +325,12 @@ public class RubiksCube {
                 }
             }
         }
+        else if(this.currentFace == 4){
+
+        }
+        else{
+
+        }
         return (Integer)null;
     }
 
