@@ -317,21 +317,46 @@ public class RubiksCube {
         return (Integer)null;
     }
 
-    private int getVerticleCornerValue(int row, int column){
-        int tempTopFace;
+    public int getVerticleCornerValue(int row, int column){
         row -= 1;
         column -= 1;
         if(row < 1){
-            tempTopFace = getTopFace();
+            if(column < 1){
+                return getFaceValue(getTopFace(),3,1);
+            }
+            else{
+                return getFaceValue(getTopFace(),3,3);
+            }
         }
         else{
-
+            if(column < 1){
+                return getFaceValue(getBottomFace(),1,1);
+            }
+            else{
+                return getFaceValue(getBottomFace(),1,3);
+            }
         }
-        return (Integer)null;
     }
 
-    private int getHorizontalCornerValue(int row, int column){
-        return (Integer)null;
+    public int getHorizontalCornerValue(int row, int column){
+        row -= 1;
+        column -= 1;
+        if(column < 1){
+            if(row < 1){
+                return getFaceValue(getLeftFace(),1,3);
+            }
+            else{
+                return getFaceValue(getLeftFace(),3,3);
+            }
+        }
+        else{
+            if(row < 1){
+                return getFaceValue(getRightFace(),1,1);
+            }
+            else{
+                return getFaceValue(getRightFace(),3,1);
+            }
+        }
     }
 
 }
