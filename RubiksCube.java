@@ -297,22 +297,33 @@ public class RubiksCube {
 
     public int getAdjacentValue(int row, int column){
         int tempFace = 0;
-        if(row == 1 || column == 1){
-            if(row == 1){
-
+        row -= 1;
+        column -= 1;
+        if(this.currentFace < 4){
+            if (row == 1){
+                if(column == 0){
+                    return getFaceValue(getLeftFace(),2,3);
+                }
+                else{
+                    return getFaceValue(getRightFace(),2,1);
+                }
             }
-            else if(row == 3){
-
+            else if(row == 0){
+                if(this.currentFace == 0 || this.currentFace == 2){
+                    return getFaceValue(getTopFace(),Math.abs(-2 + this.currentFace) + 1, 2 );
+                }
+                else{
+                    return getFaceValue(getTopFace(),2,Math.abs(-3 + this.currentFace) + 1);
+                }
             }
-            else if(column == 1){
-
+            else{
+                if(this.currentFace == 0 || this.currentFace == 2){
+                    return getFaceValue(getBottomFace(),this.currentFace + 1, 2);
+                }
+                else{
+                    return getFaceValue(getBottomFace(),2,Math.abs(-3 + this.currentFace) + 1);
+                }
             }
-            else{//column == 3
-                
-            }
-        }
-        else{
-
         }
         return (Integer)null;
     }
