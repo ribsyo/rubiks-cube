@@ -34,7 +34,7 @@ public class RubiksCube {
         }
     }
 
-    private void turnFaceLeft(int face){
+    public void turnFaceLeft(int face){
 
         //1 1 > 1 2 >  1 3 > 2 3 > 3 3 > 3 2 > 3 1 > 2 1 > 1 1
         int row = 0;
@@ -160,7 +160,7 @@ public class RubiksCube {
     }
 
 
-    private void turnFaceRight(int face){
+    public void turnFaceRight(int face){
         turnFaceLeft(face);
         turnFaceLeft(face);
         turnFaceLeft(face);
@@ -186,7 +186,8 @@ public class RubiksCube {
         }
         System.out.println(temp);
     }
-<<<<<<< Updated upstream
+//commented out because netbeans
+//<<<<<<< Updated upstream
 
 
     public boolean faceSolved(int face){//not done
@@ -222,9 +223,8 @@ public class RubiksCube {
     public int findColor(int face, int x, int y){ 
         return rubiksCube[face][x][y];
     }
-}
-=======
-    /*
+    
+        /*
     (left,right,up,down)
     face 1: 4, 2, 5, 6
     face 2: 1, 3, 5, 6
@@ -287,5 +287,113 @@ public class RubiksCube {
     public int getAdjacentValue(int face, int row, int column){
         return rubiksCube[face - 1][row -1][column - 1];
     }
+    
+    //cube solving algorithms
+    public void swapYellowEdgesLeft() {
+        turnFaceRight(2);
+        turnFaceRight(2);
+        turnFaceRight(3);
+        turnFaceRight(5);
+        turnFaceLeft(6);
+        turnFaceRight(2);
+        turnFaceRight(2);
+        turnFaceRight(6);
+        turnFaceLeft(5);
+        turnFaceRight(3);
+        turnFaceRight(2);
+        turnFaceRight(2);
+    }
+    
+    public void swapYellowEdgesRight() {
+        turnFaceRight(2);
+        turnFaceRight(2);
+        turnFaceLeft(3);
+        turnFaceRight(5);
+        turnFaceLeft(6);
+        turnFaceRight(2);
+        turnFaceRight(2);
+        turnFaceRight(6);
+        turnFaceLeft(5);
+        turnFaceLeft(3);
+        turnFaceRight(2);
+        turnFaceRight(2);
+    }
+    
+    //position yellow corners correctly
+    public void solveYellowCorners() {
+        turnFaceLeft(6);
+        turnFaceRight(2);
+        turnFaceLeft(6);
+        turnFaceRight(4);
+        turnFaceRight(4);
+        turnFaceRight(6);
+        turnFaceLeft(2);
+        turnFaceLeft(6);
+        turnFaceRight(4);
+        turnFaceRight(4);
+        turnFaceRight(6);
+        turnFaceRight(6);
+    }
+    
+    //solve yellow face
+    public void orientYellowCorners() {
+        turnFaceRight(6);
+        turnFaceRight(3);
+        turnFaceLeft(6);
+        turnFaceRight(3);
+        turnFaceRight(6);
+        turnFaceRight(3);
+        turnFaceRight(3);
+        turnFaceLeft(6);
+    }
+    
+    //create yellow cross
+    public void orientYellowEdges() {
+        turnFaceRight(2);
+        turnFaceRight(3);
+        turnFaceRight(6);
+        turnFaceLeft(3);
+        turnFaceLeft(6);
+    }
+    
+    public void solveMiddleEdgeL(int face, int adj) {
+        turnFaceRight(3);
+        turnFaceRight(adj);
+        turnFaceLeft(3);
+        turnFaceLeft(adj);
+        turnFaceLeft(3);
+        turnFaceLeft(face);
+        turnFaceRight(3);
+        turnFaceRight(face);
+    }
+    
+    public void solveMiddleEdgeR(int face, int adj) {
+        turnFaceLeft(3);
+        turnFaceLeft(adj);
+        turnFaceRight(3);
+        turnFaceRight(adj);
+        turnFaceRight(3);
+        turnFaceRight(face);
+        turnFaceLeft(3);
+        turnFaceLeft(face);
+    }
+    
+    //other functions
+    
+    //this is to shorten conditionals in the runner
+    public boolean matchingTiles(int tile1r, int tile1c, int tile2r, int tile2c) {
+        return (getFaceValue(tile1r,tile1c)==getFaceValue(tile2r,tile2c));
+    }
+    
+    public int matchingTileValue(int tile1x, int tile1y, int tile2x, int tile2y) {
+        if(getFaceValue(tile1x,tile1y)==getFaceValue(tile2x,tile2y))
+            return getFaceValue(tile1x,tile1y);
+        else
+            return 0;
+    }
 }
->>>>>>> Stashed changes
+//commented out because netbeans
+//>>>>>>> Stashed changes
+
+//commented out because netbeans
+//=======
