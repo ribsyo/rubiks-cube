@@ -41,7 +41,7 @@ public class RubiksCube {
         printAllFace();
     }
 
-    private void turnFaceLeft(int face){
+    public void turnFaceLeft(int face){
 
         //1 1 > 1 2 >  1 3 > 2 3 > 3 3 > 3 2 > 3 1 > 2 1 > 1 1
         int row = 0;
@@ -166,8 +166,7 @@ public class RubiksCube {
 
     }
 
-
-    private void turnFaceRight(int face){
+    public void turnFaceRight(int face){
         turnFaceLeft(face);
         turnFaceLeft(face);
         turnFaceLeft(face);
@@ -193,6 +192,7 @@ public class RubiksCube {
         }
         System.out.println(temp);
     }
+    
     /*
     (left,right,up,down)
     face 1: 4, 2, 5, 6
@@ -202,10 +202,21 @@ public class RubiksCube {
     face 5: 4, 2, 3, 1
     face 6: 4, 2, 1, 3
     */
+
     public int getTopFace(){
         if(this.currentFace < 4)
             return 5;
         else if(this.currentFace == 4)
+            return 3;
+
+        return 1;
+    }
+
+    public int getTopFace(int face){
+        face -= 1;
+        if(face < 4)
+            return 5;
+        else if(face == 4)
             return 3;
 
         return 1;
@@ -220,6 +231,16 @@ public class RubiksCube {
     return 3;
     }
 
+    public int getBottomFace(int face){
+        face -= 1;
+        if(face < 4)
+            return 6;
+        else if(face == 4)
+            return 1;
+
+    return 3;
+    }
+
     public int getLeftFace(){
         if(this.currentFace < 4){
             int leftFace = this.currentFace - 1;
@@ -229,9 +250,29 @@ public class RubiksCube {
         return 4;
     }
 
+    public int getLeftFace(int face){
+        face -= 1;
+        if(face < 4){
+            int leftFace = face - 1;
+            if(leftFace < 0)leftFace = 3;
+            return leftFace;
+        }
+        return 4;
+    }
+
     public int getRightFace(){
         if(this.currentFace < 4){
             int rightFace = this.currentFace + 1;
+            if(rightFace > 3)rightFace = 0;
+            return rightFace;
+        }
+        return 5;
+    }
+
+    public int getRightFace(int face){
+        face -= 1;
+        if(face < 4){
+            int rightFace = face + 1;
             if(rightFace > 3)rightFace = 0;
             return rightFace;
         }
@@ -249,6 +290,7 @@ public class RubiksCube {
     public int getFaceValue(int row, int column){
         return getFaceValue(this.currentFace + 1, row, column);
     }
+    
     public int getFaceValue(int face, int row, int column){
         return rubiksCube[face - 1][row -1][column - 1];
     }
@@ -257,10 +299,10 @@ public class RubiksCube {
         int tempFace = 0;
         if(row == 1 || column == 1){
             if(row == 1){
-                return getFaceValue(getTopFace(), row, column);
+
             }
             else if(row == 3){
-                return getFaceValue(getTopFace(), row, column);
+
             }
             else if(column == 1){
 
@@ -272,6 +314,24 @@ public class RubiksCube {
         else{
 
         }
-        return (Integer) null;
+        return (Integer)null;
     }
+
+    private int getVerticleCornerValue(int row, int column){
+        int tempTopFace;
+        row -= 1;
+        column -= 1;
+        if(row < 1){
+            tempTopFace = getTopFace();
+        }
+        else{
+
+        }
+        return (Integer)null;
+    }
+
+    private int getHorizontalCornerValue(int row, int column){
+        return (Integer)null;
+    }
+
 }
