@@ -289,6 +289,40 @@ public class RubiksCube {
     }
     
     //cube solving algorithms
+    public void checkYellowEdges() {
+        boolean ready=false;
+        for(int k=2; k<7; k++) {    
+            setCurrentFace(k);
+            switch(k) {
+                case 2:
+                    if(matchingTiles(1,3,2,3) && matchingTiles(2,3,3,3)) {
+                        turnFaceLeft(3);
+                        turnFaceLeft(3);
+                        ready=true;
+                    }
+                    break;
+                case 4:
+                    if(matchingTiles(1,1,2,1) && matchingTiles(2,1,3,1)) 
+                        ready=true;
+                    break;
+                case 5:
+                    if(matchingTiles(1,1,1,2) && matchingTiles(1,2,1,3)) {
+                        turnFaceRight(3);
+                        ready=true;
+                    }
+                    break;
+                case 6:
+                    if(matchingTiles(3,1,3,2) && matchingTiles(3,2,3,3)) {
+                        turnFaceLeft(3);
+                        ready=true;
+                    }
+                    break;
+            }
+            if (ready)
+                break;
+        }
+    }
+    
     public void swapYellowEdgesLeft() {
         turnFaceRight(2);
         turnFaceRight(2);
@@ -354,6 +388,19 @@ public class RubiksCube {
         turnFaceRight(6);
         turnFaceLeft(3);
         turnFaceLeft(6);
+    }
+    
+    public int checkMiddleEdges() {
+        int edges=0;
+        if(getFaceValue(2,2,2)==getFaceValue(2,3,2) && getFaceValue(6,2,2)==getFaceValue(6,2,3))
+            edges++;
+        if(getFaceValue(6,2,2)==getFaceValue(6,2,1) && getFaceValue(4,2,2)==getFaceValue(4,3,2))
+            edges++;
+        if(getFaceValue(4,2,2)==getFaceValue(4,1,2) && getFaceValue(5,2,2)==getFaceValue(5,2,1))
+            edges++;
+        if(getFaceValue(5,2,2)==getFaceValue(5,2,3) && getFaceValue(2,2,2)==getFaceValue(4,1,2))
+            edges++;
+        return edges;
     }
     
     public void solveMiddleEdgeL(int face, int adj) {
